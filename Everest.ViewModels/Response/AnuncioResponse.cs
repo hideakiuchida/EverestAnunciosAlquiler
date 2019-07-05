@@ -20,8 +20,9 @@ namespace Everest.ViewModels.Response
         public decimal Precio { get; set; }
         public int MaximaCantidadPersonas { get; set; }
         public bool TieneSeguridadPrivada { get; set; }
-        public bool EsActiva { get; set; }
+        public bool Activo { get; set; }
         public DateTime FechaCreacion { get; set; }
         public List<ImagenResponse> Imagenes { get; set; }
+        public List<EvaluacionResponse> Evaluaciones { get; set; }
     }
 }

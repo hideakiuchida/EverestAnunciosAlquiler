@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{e161454c-ab39-485f-b173-ecf8cd9795a0}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -87,9 +87,11 @@
     <Build Include="dbo\Stored Procedures\ConsultarImagenesPorAnuncio.sql" />
     <Build Include="dbo\Stored Procedures\CrearImagen.sql" />
     <Build Include="dbo\Stored Procedures\EliminarImagen.sql" />
+    <Build Include="dbo\Stored Procedures\ConsultarUsuario.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Everest.Database.publish.xml" />
+    <None Include="EverestAvantica.Database.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostPublishData\_Script.PostDeploymentData.sql" />

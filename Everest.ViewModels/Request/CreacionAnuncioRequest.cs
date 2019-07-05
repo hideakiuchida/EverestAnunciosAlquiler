@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Everest.ViewModels.Request
+﻿namespace Everest.ViewModels.Request
 {
     public class CreacionAnuncioRequest
     {
+        public int IdUsuario { get; set; }
         public decimal Metros2 { get; set; }
         public int CantidadHabitaciones { get; set; }
         public int CantidadBaños { get; set; }
@@ -19,6 +16,5 @@ namespace Everest.ViewModels.Request
         public decimal Precio { get; set; }
         public int MaximaCantidadPersonas { get; set; }
         public bool TieneSeguridadPrivada { get; set; }
-        public bool EsActiva { get; set; }
     }
 }

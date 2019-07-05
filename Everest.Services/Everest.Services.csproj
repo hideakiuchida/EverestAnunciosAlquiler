@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Everest.Common\Everest.Common.csproj" />
     <ProjectReference Include="..\Everest.Repository\Everest.Repository.csproj" />
+    <ProjectReference Include="..\Everest.ViewModels\Everest.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
