@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Everest.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{e161454c-ab39-485f-b173-ecf8cd9795a0}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Everest.Database</RootNamespace>
+    <AssemblyName>Everest.Database</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo" />
+    <Folder Include="dbo\Tables" />
+    <Folder Include="dbo\Stored Procedures" />
+    <Folder Include="PostPublishData" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Anuncio.sql" />
+    <Build Include="dbo\Tables\AnuncioDetalle.sql" />
+    <Build Include="dbo\Tables\Evaluacion.sql" />
+    <Build Include="dbo\Tables\Imagen.sql" />
+    <Build Include="dbo\Tables\TipoPropiedad.sql" />
+    <Build Include="dbo\Tables\Ubicacion.sql" />
+    <Build Include="dbo\Stored Procedures\ConsultarUbicacionPorAnuncio.sql" />
+    <Build Include="dbo\Stored Procedures\CrearUbicacion.sql" />
+    <Build Include="dbo\Stored Procedures\EditarUbicacion.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarUbicacion.sql" />
+    <Build Include="dbo\Stored Procedures\ConsultarAnuncioDetallePorAnuncio.sql" />
+    <Build Include="dbo\Stored Procedures\CrearAnuncioDetalle.sql" />
+    <Build Include="dbo\Stored Procedures\EditarAnuncioDetalle.sql" />
+    <Build Include="dbo\Stored Procedures\ConsultarAnuncio.sql" />
+    <Build Include="dbo\Stored Procedures\ConsultarAnuncios.sql" />
+    <Build Include="dbo\Tables\Usuario.sql" />
+    <Build Include="dbo\Tables\Rol.sql" />
+    <Build Include="dbo\Stored Procedures\CrearAnuncio.sql" />
+    <Build Include="dbo\Stored Procedures\EditarAnuncio.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarAnuncio.sql" />
+    <Build Include="dbo\Stored Procedures\ConsultarEvaluacionesPorAnuncio.sql" />
+    <Build Include="dbo\Stored Procedures\CrearEvaluacion.sql" />
+    <Build Include="dbo\Stored Procedures\ConsultarImagenesPorAnuncio.sql" />
+    <Build Include="dbo\Stored Procedures\CrearImagen.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarImagen.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Everest.Database.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostPublishData\_Script.PostDeploymentData.sql" />
+    <None Include="PostPublishData\RolData.sql" />
+    <None Include="PostPublishData\TipoPropiedadData.sql" />
+    <None Include="PostPublishData\UsuarioData.sql" />
+  </ItemGroup>
+</Project>

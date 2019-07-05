@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Usuario]
+(
+	[IdUsuario] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Nombre] VARCHAR(100) NOT NULL,
+	[Apellido] VARCHAR(100) NOT NULL,
+	[IdRol] INT NOT NULL, 
+    CONSTRAINT [FK_Usuario_Rol] FOREIGN KEY ([IdRol]) REFERENCES [Rol]([IdRol])
+)
