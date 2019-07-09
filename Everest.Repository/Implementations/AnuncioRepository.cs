@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Everest.Entities;
 using Everest.Repository.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace Everest.Repository.Implementations
                 entity.Precio,
                 entity.TieneSeguridadPrivada,
                 entity.Activo,
-                entity.FechaCreacion
+                FechaCreacion = DateTime.UtcNow
             };
             var result = await _dbConnection.QueryAsync<int>("CrearAnuncio", spEntity, commandType: CommandType.StoredProcedure);
             _dbConnection.Close();
@@ -65,8 +66,7 @@ namespace Everest.Repository.Implementations
                 entity.MaximaCantidadPersonas,
                 entity.Precio,
                 entity.TieneSeguridadPrivada,
-                entity.Activo,
-                entity.FechaCreacion
+                entity.Activo
             };
             var result = await _dbConnection.QueryAsync<bool>("EditarAnuncio", spEntity, commandType: CommandType.StoredProcedure);
             _dbConnection.Close();

@@ -13,7 +13,7 @@ namespace Everest.Repository.Implementations
         {
         }
 
-        public async Task<AnuncioDetalleEntity> ConsultarPorAnuncioDetalleAsync(int id)
+        public async Task<AnuncioDetalleEntity> ConsultarAnuncioDetallePorAnuncioAsync(int id)
         {
             if(_dbConnection.State == ConnectionState.Closed)
                 _dbConnection.Open();

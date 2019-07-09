@@ -9,16 +9,31 @@ namespace Everest.AnunciosAlquiler.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<UsuarioEntity, UsuarioResponse>();
+            MappingRequests();
+            MappingResponses();
+        }
 
+        private void MappingRequests()
+        {
             CreateMap<CreacionAnuncioRequest, AnuncioEntity>();
             CreateMap<CreacionAnuncioRequest, AnuncioDetalleEntity>();
             CreateMap<CreacionAnuncioRequest, UbicacionEntity>();
             CreateMap<CreacionAnuncioRequest, TipoPropiedadEntity>();
 
+            CreateMap<EdicionAnuncioRequest, AnuncioEntity>();
+            CreateMap<EdicionAnuncioRequest, AnuncioDetalleEntity>();
+            CreateMap<EdicionAnuncioRequest, UbicacionEntity>();
+            CreateMap<EdicionAnuncioRequest, TipoPropiedadEntity>();
+
+            CreateMap<CreacionEvaluacionRequest, EvaluacionEntity>();
+            CreateMap<CreacionImagenRequest, ImagenEntity>();
+        }
+
+        private void MappingResponses()
+        {
+            CreateMap<UsuarioEntity, UsuarioResponse>();
+
             CreateMap<AnuncioEntity, AnuncioResponse>();
-            CreateMap<AnuncioDetalleEntity, AnuncioResponse>();
-            CreateMap<UbicacionEntity, AnuncioResponse>();
             CreateMap<TipoPropiedadEntity, TipoPropiedadResponse>();
             CreateMap<ImagenEntity, ImagenResponse>();
             CreateMap<EvaluacionEntity, EvaluacionResponse>();

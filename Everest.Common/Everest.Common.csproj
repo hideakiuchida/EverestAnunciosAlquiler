@@ -5,12 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bogus" Version="27.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Fakes\" />
+    <ProjectReference Include="..\Everest.ViewModels\Everest.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

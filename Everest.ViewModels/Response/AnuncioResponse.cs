@@ -7,6 +7,7 @@ namespace Everest.ViewModels.Response
     public class AnuncioResponse
     {
         public int IdAnuncio { get; set; }
+        public UsuarioResponse Usuario { get; set; }
         public decimal Metros2 { get; set; }
         public int CantidadHabitaciones { get; set; }
         public int CantidadBaños { get; set; }
@@ -22,7 +23,7 @@ namespace Everest.ViewModels.Response
         public bool TieneSeguridadPrivada { get; set; }
         public bool Activo { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public List<ImagenResponse> Imagenes { get; set; }
-        public List<EvaluacionResponse> Evaluaciones { get; set; }
+        public IEnumerable<ImagenResponse> Imagenes { get; set; }
+        public IEnumerable<EvaluacionResponse> Evaluaciones { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace Everest.Repository.Implementations
                 entity.IdAnuncio,
                 entity.Comentario,
                 entity.Calificacion,
-                entity.FechaCreacion
+                FechaCreacion = DateTime.UtcNow
             };
             var result = await _dbConnection.QueryAsync<int>("CrearEvaluacion", spEntity, commandType: CommandType.StoredProcedure);
             _dbConnection.Close();

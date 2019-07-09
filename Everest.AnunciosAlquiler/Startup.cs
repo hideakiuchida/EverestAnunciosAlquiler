@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Everest.Common.Extensions;
+using Everest.Common.Settings;
+using Everest.Repository.Implementations;
+using Everest.Repository.Interfaces;
+using Everest.Services.Implementations;
+using Everest.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using System.Data;
+using System.Data.SqlClient;
+using System.Net;
 
 namespace Everest.AnunciosAlquiler
 {
@@ -38,6 +36,7 @@ namespace Everest.AnunciosAlquiler
             {
                 x.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "Everest API", Version = "v1" });
             });
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
 
             services.AddScoped<IDbConnection>(x => new SqlConnection(Configuration.GetConnectionString("SqlServerConnection")));
@@ -81,12 +80,21 @@ namespace Everest.AnunciosAlquiler
         #region Privates Methods
         private void RegisterServices(IServiceCollection services)
         {
-            //services.AddScoped<IParticipanteService, ParticipanteService>();
+            services.AddScoped<IAnuncioService, AnuncioService>();
+            services.AddScoped<IEvaluacionService, EvaluacionService>();
+            services.AddScoped<IImagenService, ImagenService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
         }
 
         private void RegisterRepositories(IServiceCollection services)
         {
-            //services.AddScoped<IParticipanteRepository, ParticipanteRepository>();
+            services.AddScoped<IAnuncioDetalleRepository, AnuncioDetalleRepository>();
+            services.AddScoped<IAnuncioRepository, AnuncioRepository>();
+            services.AddScoped<IEvaluacionRepository, EvaluacionRepository>();
+            services.AddScoped<IImagenRepository, ImagenRepository>();
+            services.AddScoped<IUbicacionRepository, UbicacionRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<ITipoPropiedadRepository, TipoPropiedadRepository>();
         }
         #endregion
     }

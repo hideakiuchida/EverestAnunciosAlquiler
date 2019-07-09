@@ -6,8 +6,7 @@
 	@Precio int = NULL,
 	@MaximaCantidadPersonas int = NULL,
 	@TieneSeguridadPrivada int = NULL,
-	@Activo bit = NULL,
-	@FechaCreacion datetime = NULL
+	@Activo bit = NULL
 AS
 BEGIN
 	DECLARE @Success BIT;
@@ -20,7 +19,6 @@ BEGIN
 		  ,[MaximaCantidadPersonas] = CASE WHEN @MaximaCantidadPersonas IS NULL THEN [MaximaCantidadPersonas] ELSE @MaximaCantidadPersonas END
 		  ,[TieneSeguridadPrivada] = CASE WHEN @TieneSeguridadPrivada IS NULL THEN [TieneSeguridadPrivada] ELSE @TieneSeguridadPrivada END
 		  ,[Activo] = CASE WHEN @Activo IS NULL THEN [Activo] ELSE @Activo END
-		  ,[FechaCreacion] = CASE WHEN @FechaCreacion IS NULL THEN [FechaCreacion] ELSE @FechaCreacion END
 	WHERE [IdAnuncio] = @IdAnuncio;
 
 	IF(@@ROWCOUNT > 0)

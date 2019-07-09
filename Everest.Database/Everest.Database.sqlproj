@@ -88,6 +88,8 @@
     <Build Include="dbo\Stored Procedures\CrearImagen.sql" />
     <Build Include="dbo\Stored Procedures\EliminarImagen.sql" />
     <Build Include="dbo\Stored Procedures\ConsultarUsuario.sql" />
+    <Build Include="dbo\Stored Procedures\ConsultarTipoPropiedad.sql" />
+    <Build Include="dbo\Stored Procedures\ConsultarImagen.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Everest.Database.publish.xml" />

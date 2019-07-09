@@ -16,6 +16,15 @@ namespace Everest.Repository.Implementations
         {
         }
 
+        public async Task<ImagenEntity> ConsultarAsync(int id)
+        {
+            if (_dbConnection.State == ConnectionState.Closed)
+                _dbConnection.Open();
+            var result = await _dbConnection.QueryAsync<ImagenEntity>("ConsultarImagen", new { Id = id }, commandType: CommandType.StoredProcedure);
+            _dbConnection.Close();
+            return result.FirstOrDefault();
+        }
+
         public async Task<List<ImagenEntity>> ConsultarPorAnuncioAsync(int id)
         {
             if (_dbConnection.State == ConnectionState.Closed)
@@ -35,7 +44,7 @@ namespace Everest.Repository.Implementations
                 entity.Descripcion,
                 entity.ImagenUrl,
                 entity.IdPublico,
-                entity.FechaCreacion
+                FechaCreacion = DateTime.UtcNow
             };
             var result = await _dbConnection.QueryAsync<int>("CrearImagen", spEntity, commandType: CommandType.StoredProcedure);
             _dbConnection.Close();

@@ -12,5 +12,5 @@ BEGIN
       ,[Activo]
       ,[FechaCreacion]
 	FROM [dbo].[Anuncio]
-	WHERE (@IdUsuario IS NULL OR [IdAnuncio] = @IdUsuario);
+	WHERE (@IdUsuario IS NULL OR [IdUsuario] = @IdUsuario);
 END
