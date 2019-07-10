@@ -5,7 +5,8 @@ namespace Everest.Repository.Interfaces
 {
     public interface IPromocionAnuncioRepository
     {
+        Task<PromocionAnuncioEntity> ConsultarPromocionAsync();
         Task<int> CrearPromocionAnuncioAsync(int idAnuncio);
-        Task<bool> AgendarPromocioAnuncioAsync(PromocionAnuncioEntity entity);
+        Task<bool> AgendarPromocionAnuncioAsync(PromocionAnuncioEntity entity);
     }
 }
