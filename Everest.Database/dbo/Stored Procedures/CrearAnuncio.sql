@@ -2,7 +2,7 @@
 	@IdUsuario int,
 	@AdmiteMascota bit,
 	@IdTipoPropiedad int,
-	@Precio int,
+	@Precio decimal(10,2),
 	@MaximaCantidadPersonas int,
 	@TieneSeguridadPrivada int,
 	@Activo bit,

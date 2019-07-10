@@ -2,11 +2,11 @@
 	@IdUbicacion int,
 	@IdAnuncio int = NULL,
 	@Direccion varchar(500) = NULL,
-	@Latitud decimal(10,8) = NULL,
-	@Longitud decimal(10,8) = NULL
+	@Latitud decimal(10,6) = NULL,
+	@Longitud decimal(10,6) = NULL
 AS
 BEGIN
-	DECLARE @Success BIT;
+	DECLARE @Success BIT = 0;
 
 	UPDATE [dbo].[Ubicacion]
 	SET [IdAnuncio] = CASE WHEN @IdAnuncio IS NULL THEN [IdAnuncio] ELSE @IdAnuncio END

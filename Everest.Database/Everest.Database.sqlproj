@@ -90,6 +90,10 @@
     <Build Include="dbo\Stored Procedures\ConsultarUsuario.sql" />
     <Build Include="dbo\Stored Procedures\ConsultarTipoPropiedad.sql" />
     <Build Include="dbo\Stored Procedures\ConsultarImagen.sql" />
+    <Build Include="dbo\Tables\PromocionAnuncio.sql" />
+    <Build Include="dbo\Stored Procedures\AgendarPromocioAnuncio.sql" />
+    <Build Include="dbo\Stored Procedures\CrearPromocionAnuncio.sql" />
+    <Build Include="dbo\Stored Procedures\ConsultarAnuncioMasAntiguo.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Everest.Database.publish.xml" />

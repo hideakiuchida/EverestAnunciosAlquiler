@@ -2,7 +2,7 @@
 (
 	[IdAnuncioDetalle] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[IdAnuncio] INT NOT NULL,
-	[Metros2] DECIMAL(10,8) NULL,
+	[Metros2] INT NULL,
 	[CantidadHabitaciones] INT NULL,
 	[CantidadBaños] INT NULL,
 	[CantidadParqueos] INT NULL,

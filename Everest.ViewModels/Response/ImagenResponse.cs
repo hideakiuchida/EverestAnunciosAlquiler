@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Everest.ViewModels.Response
+﻿namespace Everest.ViewModels.Response
 {
     public class ImagenResponse
     {

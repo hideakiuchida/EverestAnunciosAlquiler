@@ -57,10 +57,11 @@ namespace Everest.Services.Implementations
 
                 var anuncioResponse = _mapper.Map<AnuncioResponse>(anuncio);
                 var usuarioResponse = usuario is null ? new UsuarioResponse() : _mapper.Map<UsuarioResponse>(usuario);
-                var tipoPropiedadResponse = usuario is null ? new TipoPropiedadResponse() : _mapper.Map<TipoPropiedadResponse>(tipoPropiedad);
+                var tipoPropiedadResponse = tipoPropiedad is null ? new TipoPropiedadResponse() : _mapper.Map<TipoPropiedadResponse>(tipoPropiedad);
                 var evaluacionResponses = _mapper.Map<IEnumerable<EvaluacionResponse>>(evaluaciones);
                 var imagenResponses = _mapper.Map<IEnumerable<ImagenResponse>>(imagenes);
                 ubicacion = ubicacion ?? new UbicacionEntity();
+                anuncioDetalle = anuncioDetalle ?? new AnuncioDetalleEntity();
 
                 anuncioResponse.Usuario = usuarioResponse;
                 anuncioResponse.TipoPropiedad = tipoPropiedadResponse;
@@ -135,7 +136,7 @@ namespace Everest.Services.Implementations
 
             var anuncioDetalle = _mapper.Map<AnuncioDetalleEntity>(request);
             var anuncioDetalleEntity = await _anuncioDetalleRepository.ConsultarAnuncioDetallePorAnuncioAsync(request.IdAnuncio);
-            anuncioDetalle.IdAnuncioDetalle = anuncioDetalleEntity.IdAnuncioDetalle;
+            anuncioDetalle.IdAnuncioDetalle = anuncioDetalleEntity != default ? anuncioDetalleEntity.IdAnuncioDetalle : default;
             var anuncioDetalleUpdated = await _anuncioDetalleRepository.EditarAnuncioDetalleAsync(anuncioDetalle);
             if (!anuncioDetalleUpdated)
             {
@@ -145,7 +146,7 @@ namespace Everest.Services.Implementations
 
             var ubicacion = _mapper.Map<UbicacionEntity>(request);
             var ubicacionEntity = await _ubicacionRepository.ConsultarPorAnuncioAsync(request.IdAnuncio);
-            ubicacion.IdUbicacion = ubicacionEntity.IdUbicacion;
+            ubicacion.IdUbicacion = ubicacionEntity != default ? ubicacionEntity.IdUbicacion : default;
             var ubicacionUpdated = await _ubicacionRepository.EditarUbicacionAsync(ubicacion);
             if (!ubicacionUpdated)
             {

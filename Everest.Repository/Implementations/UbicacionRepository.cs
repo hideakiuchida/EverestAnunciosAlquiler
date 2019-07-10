@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Everest.Entities;
 using Everest.Repository.Interfaces;
+using System;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,8 +30,8 @@ namespace Everest.Repository.Implementations
             var spEntity = new {
                 entity.IdAnuncio,
                 entity.Direccion,
-                entity.Latitud,
-                entity.Longitud };
+                Latitud = Math.Round(entity.Latitud, 6),
+                Longitud = Math.Round(entity.Longitud, 6) };
             var result = await _dbConnection.QueryAsync<int>("CrearUbicacion", spEntity, commandType: CommandType.StoredProcedure);
             _dbConnection.Close();
             return result.FirstOrDefault();

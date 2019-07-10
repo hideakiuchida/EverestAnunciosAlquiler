@@ -17,69 +17,125 @@ namespace Everest.Repository.Implementations
 
         public async Task<AnuncioEntity> ConsultarAsync(int id)
         {
-            if (_dbConnection.State == ConnectionState.Closed)
-                _dbConnection.Open();
-            var result = await _dbConnection.QueryAsync<AnuncioEntity>("ConsultarAnuncio", new { Id = id }, commandType: CommandType.StoredProcedure);
-            _dbConnection.Close();
-            return result.FirstOrDefault();
+            try
+            {
+                if (_dbConnection.State == ConnectionState.Closed)
+                    _dbConnection.Open();
+                var result = await _dbConnection.QueryAsync<AnuncioEntity>("ConsultarAnuncio", new { Id = id }, commandType: CommandType.StoredProcedure);
+                _dbConnection.Close();
+                return result.FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                return default;
+            }
+            
         }
 
         public async Task<List<AnuncioEntity>> ConsultarAnunciosAsync(int? idUsuario)
         {
-            if (_dbConnection.State == ConnectionState.Closed)
-                _dbConnection.Open();
-            var result = await _dbConnection.QueryAsync<AnuncioEntity>("ConsultarAnuncios", new { IdUsuario = idUsuario }, commandType: CommandType.StoredProcedure);
-            _dbConnection.Close();
-            return result.ToList();
+            try
+            {
+                if (_dbConnection.State == ConnectionState.Closed)
+                    _dbConnection.Open();
+                var result = await _dbConnection.QueryAsync<AnuncioEntity>("ConsultarAnuncios", new { IdUsuario = idUsuario }, commandType: CommandType.StoredProcedure);
+                _dbConnection.Close();
+                return result.ToList();
+            }
+            catch (Exception)
+            {
+                return default;
+            }
+            
         }
 
         public async Task<int> CrearAnuncioAsync(AnuncioEntity entity)
         {
-            if (_dbConnection.State == ConnectionState.Closed)
-                _dbConnection.Open();
-            var spEntity = new
+            try
             {
-                entity.IdUsuario,
-                entity.AdmiteMascota,
-                entity.IdTipoPropiedad,
-                entity.MaximaCantidadPersonas,
-                entity.Precio,
-                entity.TieneSeguridadPrivada,
-                entity.Activo,
-                FechaCreacion = DateTime.UtcNow
-            };
-            var result = await _dbConnection.QueryAsync<int>("CrearAnuncio", spEntity, commandType: CommandType.StoredProcedure);
-            _dbConnection.Close();
-            return result.FirstOrDefault();
+                if (_dbConnection.State == ConnectionState.Closed)
+                    _dbConnection.Open();
+                var spEntity = new
+                {
+                    entity.IdUsuario,
+                    entity.AdmiteMascota,
+                    entity.IdTipoPropiedad,
+                    entity.MaximaCantidadPersonas,
+                    entity.Precio,
+                    entity.TieneSeguridadPrivada,
+                    entity.Activo,
+                    FechaCreacion = DateTime.UtcNow
+                };
+                var result = await _dbConnection.QueryAsync<int>("CrearAnuncio", spEntity, commandType: CommandType.StoredProcedure);
+                _dbConnection.Close();
+                return result.FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                return default;
+            }
+            
         }
 
         public async Task<bool> EditarAnuncioAsync(AnuncioEntity entity)
         {
-            if (_dbConnection.State == ConnectionState.Closed)
-                _dbConnection.Open();
-            var spEntity = new
+            try
             {
-                entity.IdAnuncio,
-                entity.IdUsuario,
-                entity.AdmiteMascota,
-                entity.IdTipoPropiedad,
-                entity.MaximaCantidadPersonas,
-                entity.Precio,
-                entity.TieneSeguridadPrivada,
-                entity.Activo
-            };
-            var result = await _dbConnection.QueryAsync<bool>("EditarAnuncio", spEntity, commandType: CommandType.StoredProcedure);
-            _dbConnection.Close();
-            return result.FirstOrDefault();
+                if (_dbConnection.State == ConnectionState.Closed)
+                    _dbConnection.Open();
+                var spEntity = new
+                {
+                    entity.IdAnuncio,
+                    entity.IdUsuario,
+                    entity.AdmiteMascota,
+                    entity.IdTipoPropiedad,
+                    entity.MaximaCantidadPersonas,
+                    entity.Precio,
+                    entity.TieneSeguridadPrivada,
+                    entity.Activo
+                };
+                var result = await _dbConnection.QueryAsync<bool>("EditarAnuncio", spEntity, commandType: CommandType.StoredProcedure);
+                _dbConnection.Close();
+                return result.FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                return default;
+            }
+            
         }
 
         public async Task<bool> EliminarAnuncioAsync(int id)
         {
-            if (_dbConnection.State == ConnectionState.Closed)
-                _dbConnection.Open();
-            var result = await _dbConnection.QueryAsync<bool>("EliminarAnuncio", new { Id = id }, commandType: CommandType.StoredProcedure);
-            _dbConnection.Close();
-            return result.FirstOrDefault();
+            try
+            {
+                if (_dbConnection.State == ConnectionState.Closed)
+                    _dbConnection.Open();
+                var result = await _dbConnection.QueryAsync<bool>("EliminarAnuncio", new { Id = id }, commandType: CommandType.StoredProcedure);
+                _dbConnection.Close();
+                return result.FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                return default;
+            }
+            
+        }
+
+        public async Task<AnuncioEntity> ConsultarAnuncioMasAntiguoAsync()
+        {
+            try
+            {
+                if (_dbConnection.State == ConnectionState.Closed)
+                    _dbConnection.Open();
+                var result = await _dbConnection.QueryAsync<AnuncioEntity>("ConsultarAnuncioMasAntiguo", commandType: CommandType.StoredProcedure);
+                _dbConnection.Close();
+                return result.FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                return default;
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[CrearAnuncioDetalle]
 	@IdAnuncio int,
-	@Metros2 decimal(10,8) = NULL,
+	@Metros2 int = NULL,
 	@CantidadHabitaciones int  = NULL,
 	@CantidadBaños int  = NULL,
 	@CantidadParqueos int,

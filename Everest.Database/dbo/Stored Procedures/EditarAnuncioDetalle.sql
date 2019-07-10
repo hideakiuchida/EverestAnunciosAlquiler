@@ -1,14 +1,14 @@
 ﻿CREATE PROCEDURE [dbo].[EditarAnuncioDetalle]
 	@IdAnuncioDetalle int,
 	@IdAnuncio int = NULL,
-	@Metros2 decimal(10,8) = NULL,
+	@Metros2 int = NULL,
 	@CantidadHabitaciones int  = NULL,
 	@CantidadBaños int  = NULL,
 	@CantidadParqueos int  = NULL,
 	@Plantas int  = NULL
 AS
 BEGIN
-	DECLARE @Success BIT;
+	DECLARE @Success BIT = 0;
 
 	UPDATE [dbo].[AnuncioDetalle]
 	SET [IdAnuncio] = CASE WHEN @IdAnuncio IS NULL THEN [IdAnuncio] ELSE @IdAnuncio END

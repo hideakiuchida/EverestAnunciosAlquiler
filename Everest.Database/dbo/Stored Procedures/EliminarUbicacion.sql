@@ -2,7 +2,7 @@
 	@IdUbicacion int
 AS
 BEGIN
-	DECLARE @Success BIT;
+	DECLARE @Success BIT = 0;
 
 	DELETE FROM [dbo].[Ubicacion]
 	WHERE [IdUbicacion] = @IdUbicacion;
