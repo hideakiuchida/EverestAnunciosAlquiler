@@ -1,11 +1,10 @@
 ﻿using Bogus;
 using Everest.Common.Enums;
-using Everest.Entities;
 using Everest.ViewModels.Request;
 using Everest.ViewModels.Response;
 using System.Collections.Generic;
 
-namespace Everest.UnitTests.Fakes
+namespace Everest.ViewModels.Fakes
 {
     public static class AnuncioFake
     {

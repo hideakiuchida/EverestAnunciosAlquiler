@@ -2,7 +2,7 @@
 using Everest.Common.Enums;
 using Everest.ViewModels.Response;
 
-namespace Everest.UnitTests.Fakes
+namespace Everest.ViewModels.Fakes
 {
     public static class UsuarioFake
     {

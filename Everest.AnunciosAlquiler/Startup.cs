@@ -37,7 +37,7 @@ namespace Everest.AnunciosAlquiler
                 x.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "Everest API", Version = "v1" });
             });
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
-            services.AddAutoMapper();
+           // services.AddAutoMapper();
 
             services.AddScoped<IDbConnection>(x => new SqlConnection(Configuration.GetConnectionString("SqlServerConnection")));
 

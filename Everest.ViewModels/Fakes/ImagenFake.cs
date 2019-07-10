@@ -3,7 +3,7 @@ using Everest.ViewModels.Response;
 using System;
 using System.Collections.Generic;
 
-namespace Everest.UnitTests.Fakes
+namespace Everest.ViewModels.Fakes
 {
     public static class ImagenFake
     {

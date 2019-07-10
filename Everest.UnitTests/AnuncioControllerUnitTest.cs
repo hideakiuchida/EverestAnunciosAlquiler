@@ -1,8 +1,8 @@
 ﻿using Everest.AnunciosAlquiler.Controllers.v1;
 using Everest.Common.Enums;
 using Everest.Services.Interfaces;
-using Everest.UnitTests.Fakes;
 using Everest.ViewModels;
+using Everest.ViewModels.Fakes;
 using Everest.ViewModels.Request;
 using Everest.ViewModels.Response;
 using Microsoft.AspNetCore.Http;

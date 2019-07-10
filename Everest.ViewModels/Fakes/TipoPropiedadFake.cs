@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using Everest.ViewModels.Response;
 
-namespace Everest.UnitTests.Fakes
+namespace Everest.ViewModels.Fakes
 {
     public static class TipoPropiedadFake
     {
