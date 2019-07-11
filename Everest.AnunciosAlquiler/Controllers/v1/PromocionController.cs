@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using Everest.Common.Enums;
+﻿using Everest.Common.Enums;
 using Everest.Services.Interfaces;
 using Everest.ViewModels;
 using Everest.ViewModels.Request;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Everest.AnunciosAlquiler.Controllers.v1
 {
@@ -24,6 +21,74 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
             _usuarioService = usuarioService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ConsultarPromocionAsync(int idUsuario)
+        {
+            try
+            {
+                var responseUser = await ValidarInquilino(idUsuario);
+                if (!responseUser.Success)
+                    return StatusCode(StatusCodes.Status403Forbidden, responseUser.Message);
+
+                var response = await _promocionService.ConsultarPromocionAsync(idUsuario);
+                if (!response.Success)
+                    return StatusCode(StatusCodes.Status404NotFound, responseUser.Message);
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+
+        [HttpPost]
+        [Route("generar")]
+        public async Task<IActionResult> GenerarPromocionAnuncioAsync(int idUsuario)
+        {
+            try
+            {
+                var responseUser = await ValidarAdministrador(idUsuario);
+                if (!responseUser.Success)
+                    return StatusCode(StatusCodes.Status403Forbidden, responseUser.Message);
+
+                var response = await _promocionService.GenerarPromocionAnuncioAsync();
+                if (!response.Success)
+                    return StatusCode(StatusCodes.Status400BadRequest, responseUser.Message);
+
+                return Created("", response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+
+        }
+
+        [HttpPut()]
+        [Route("agendar")]
+        public async Task<IActionResult> AgendarPromocionAnuncioAsync(int idUsuario, [FromBody]AgendarPromocionAnuncioRequest request)
+        {
+            try
+            {
+                var responseUser = await ValidarInquilino(idUsuario);
+                if (!responseUser.Success)
+                    return StatusCode(StatusCodes.Status403Forbidden, responseUser.Message);
+
+                var response = await _promocionService.AgendarPromocionAnuncioAsync(idUsuario, request);
+                if (!response.Success)
+                    return StatusCode(StatusCodes.Status400BadRequest, responseUser.Message);
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+
+        }
+
         #region Privates Methods
         private async Task<BaseServiceResponse<int>> ValidarAdministrador(int idUsuario)
         {
@@ -32,7 +97,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
             response.Data = idUsuario;
             if (usuario.Data?.IdRol != (int)RolEnums.Administrador)
             {
-                response.Message = "Debe tener rol de admnistrador para poder registrar una foto.";
+                response.Message = "Debe tener rol de admnistrador para poder generar una promoción.";
                 return response;
             }
 
@@ -47,7 +112,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
             response.Data = idUsuario;
             if (usuario.Data?.IdRol != (int)RolEnums.Inquilino)
             {
-                response.Message = "Debe tener rol de inquilino para poder registrar una foto.";
+                response.Message = "Debe tener rol de inquilino para poder ejecutar la solicitud.";
                 return response;
             }
 
@@ -55,74 +120,5 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
             return response;
         }
         #endregion
-
-        [HttpGet]
-        public async Task<IActionResult> ConsultarPromocionAsync(int idUsuario)
-        {
-            try
-            {
-                var responseUser = await ValidarInquilino(idUsuario);
-                if (!responseUser.Success)
-                    return Forbid(responseUser.Message);
-
-                var response = await _promocionService.ConsultarPromocionAsync();
-                if (!response.Success)
-                    return NotFound(response.Message);
-
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                return Content(ex.Message);
-            }
-        }
-
-
-        [HttpPost]
-        public async Task<IActionResult> GenerarPromocionAnuncioAsync(int idUsuario)
-        {
-            try
-            {
-                var responseUser = await ValidarInquilino(idUsuario);
-                if (!responseUser.Success)
-                    return Forbid(responseUser.Message);
-
-                var response = await _promocionService.GenerarPromocionAnuncioAsync();
-                if (!response.Success)
-                    return BadRequest(response.Message);
-
-                return Created("", response);
-            }
-            catch (Exception ex)
-            {
-                HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                return Content(ex.Message);
-            }
-
-        }
-
-        [HttpPut()]
-        public async Task<IActionResult> AgendarPromocionAnuncioAsync(int idUsuario, [FromBody]AgendarPromocionAnuncioRequest request)
-        {
-            try
-            {
-                var responseUser = await ValidarAdministrador(idUsuario);
-                if (!responseUser.Success)
-                    return Forbid(responseUser.Message);
-
-                var response = await _promocionService.AgendarPromocionAnuncioAsync(request);
-                if (!response.Success)
-                    return BadRequest(response.Message);
-
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                return Content(ex.Message);
-            }
-
-        }
     }
 }

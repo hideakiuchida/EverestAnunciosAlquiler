@@ -201,8 +201,9 @@ namespace Everest.UnitTests
             var response = anuncioController.ConsultarAnunciosPorIdUsuario(InvalidOwnerUserId);
 
             //Assert
-            var result = response.Result as ForbidResult;
-            Assert.IsNotNull(result.ToString());
+            var result = response.Result as ObjectResult;
+            Assert.IsTrue(result.StatusCode == StatusCodes.Status403Forbidden);
+            Assert.IsNotNull(result.Value);
         }
 
         [Test]
@@ -217,8 +218,9 @@ namespace Everest.UnitTests
             var response = anuncioController.Crear(InvalidOwnerUserId, ValidCreacionAnuncioRequest);
 
             //Assert
-            var result = response.Result as ForbidResult;
-            Assert.IsNotNull(result.ToString());
+            var result = response.Result as ObjectResult;
+            Assert.IsTrue(result.StatusCode == StatusCodes.Status403Forbidden);
+            Assert.IsNotNull(result.Value);
         }
 
         [Test]
@@ -233,8 +235,7 @@ namespace Everest.UnitTests
             var response = anuncioController.Crear(ValidOwnerUserId, default);
 
             //Assert
-            var result = response.Result as BadRequestObjectResult;
-            Assert.IsNotNull(result.Value);
+            var result = response.Result as ObjectResult;
             Assert.IsTrue(result.StatusCode == StatusCodes.Status400BadRequest);
         }
 
@@ -250,8 +251,9 @@ namespace Everest.UnitTests
             var response = anuncioController.Editar(InvalidOwnerUserId, ValidEdicionAnuncioRequest);
 
             //Assert
-            var result = response.Result as ForbidResult;
-            Assert.IsNotNull(result.ToString());
+            var result = response.Result as ObjectResult;
+            Assert.IsTrue(result.StatusCode == StatusCodes.Status403Forbidden);
+            Assert.IsNotNull(result.Value);
         }
 
         [Test]
@@ -266,8 +268,7 @@ namespace Everest.UnitTests
             var response = anuncioController.Editar(ValidOwnerUserId, default);
 
             //Assert
-            var result = response.Result as BadRequestObjectResult;
-            Assert.IsNotNull(result.Value);
+            var result = response.Result as ObjectResult;
             Assert.IsTrue(result.StatusCode == StatusCodes.Status400BadRequest);
         }
 
@@ -283,8 +284,9 @@ namespace Everest.UnitTests
             var response = anuncioController.Eliminar(InvalidOwnerUserId, ValidAnuncioId);
 
             //Assert
-            var result = response.Result as ForbidResult;
-            Assert.IsNotNull(result.ToString());
+            var result = response.Result as ObjectResult;
+            Assert.IsTrue(result.StatusCode == StatusCodes.Status403Forbidden);
+            Assert.IsNotNull(result.Value);
         }
 
         [Test]
@@ -299,8 +301,7 @@ namespace Everest.UnitTests
             var response = anuncioController.Eliminar(ValidOwnerUserId, InvalidAnuncioId);
 
             //Assert
-            var result = response.Result as BadRequestObjectResult;
-            Assert.IsNotNull(result.Value);
+            var result = response.Result as ObjectResult;
             Assert.IsTrue(result.StatusCode == StatusCodes.Status400BadRequest);
         }
         #endregion

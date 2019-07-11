@@ -2,7 +2,6 @@
 {
     public class CreacionAnuncioRequest
     {
-        public int IdUsuario { get; set; }
         public int Metros2 { get; set; }
         public int CantidadHabitaciones { get; set; }
         public int CantidadBaños { get; set; }

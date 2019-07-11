@@ -27,6 +27,8 @@ namespace Everest.AnunciosAlquiler.Helpers
 
             CreateMap<CreacionEvaluacionRequest, EvaluacionEntity>();
             CreateMap<CreacionImagenRequest, ImagenEntity>();
+
+            CreateMap<AgendarPromocionAnuncioRequest, PromocionAnuncioEntity>();
         }
 
         private void MappingResponses()
@@ -37,6 +39,8 @@ namespace Everest.AnunciosAlquiler.Helpers
             CreateMap<TipoPropiedadEntity, TipoPropiedadResponse>();
             CreateMap<ImagenEntity, ImagenResponse>();
             CreateMap<EvaluacionEntity, EvaluacionResponse>();
+
+            CreateMap<PromocionAnuncioEntity, PromocionAnuncioResponse>();
         }
     }
 }

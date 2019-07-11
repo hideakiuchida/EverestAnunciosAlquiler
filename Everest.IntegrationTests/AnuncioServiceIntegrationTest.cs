@@ -30,7 +30,7 @@ namespace Everest.IntegrationTests
             //Arrange
             string connectionString = "Server=HIDEAKIUCHIDA;Database=EVERESTDB;Integrated Security=True;";
             string avanticaConnectionString = "Server=LIM-WS00279\\SQLEXPRESS;Database=EVERESTDB;Integrated Security=True;";
-            IDbConnection dbConnection = new SqlConnection(avanticaConnectionString);
+            IDbConnection dbConnection = new SqlConnection(connectionString);
             IAnuncioRepository anuncioRepository = new AnuncioRepository(dbConnection);
             IAnuncioDetalleRepository anuncioDetalleRepository = new AnuncioDetalleRepository(dbConnection);
             IUbicacionRepository ubicacionRepository = new UbicacionRepository(dbConnection);

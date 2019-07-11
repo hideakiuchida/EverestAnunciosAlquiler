@@ -84,6 +84,7 @@ namespace Everest.AnunciosAlquiler
             services.AddScoped<IEvaluacionService, EvaluacionService>();
             services.AddScoped<IImagenService, ImagenService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IPromocionService, PromocionService>();
         }
 
         private void RegisterRepositories(IServiceCollection services)
@@ -95,6 +96,7 @@ namespace Everest.AnunciosAlquiler
             services.AddScoped<IUbicacionRepository, UbicacionRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ITipoPropiedadRepository, TipoPropiedadRepository>();
+            services.AddScoped<IPromocionAnuncioRepository, PromocionAnuncioRepository>();
         }
         #endregion
     }

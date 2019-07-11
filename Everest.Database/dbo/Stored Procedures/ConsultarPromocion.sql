@@ -7,6 +7,6 @@ BEGIN
       ,[Agendado]
       ,[FechaCreacion]
 	FROM [dbo].[PromocionAnuncio]
-	WHERE [Agendado]= 0
+	WHERE [Agendado] IS NULL
 	ORDER BY [FechaCreacion] DESC;
 END

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using Everest.Common.Enums;
+﻿using Everest.Common.Enums;
 using Everest.Services.Interfaces;
 using Everest.ViewModels;
 using Everest.ViewModels.Request;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Everest.AnunciosAlquiler.Controllers.v1
 {
@@ -49,18 +46,17 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
             {
                 var responseUser = await ValidarPropietario(idUsuario);
                 if (!responseUser.Success)
-                    return Forbid(responseUser.Message);
+                    return StatusCode(StatusCodes.Status403Forbidden, responseUser.Message);
 
                 var response = await _imagenService.CrearImagenAsync(idAnuncio, request);
                 if (!response.Success)
-                    return BadRequest(response.Message);
+                    return StatusCode(StatusCodes.Status400BadRequest, responseUser.Message);
 
                 return Created("", response);
             }
             catch (Exception ex)
             {
-                HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                return Content(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
             
         }
@@ -72,18 +68,17 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
             {
                 var responseUser = await ValidarPropietario(idUsuario);
                 if (!responseUser.Success)
-                    return Forbid(responseUser.Message);
+                    return StatusCode(StatusCodes.Status403Forbidden, responseUser.Message);
 
                 var response = await _imagenService.EliminarAsync(idAnuncio, id);
                 if (!response.Success)
-                    return BadRequest(response.Message);
+                    return StatusCode(StatusCodes.Status400BadRequest, responseUser.Message);
 
                 return Ok(response);
             }
             catch (Exception ex)
             {
-                HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                return Content(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
             
         }
