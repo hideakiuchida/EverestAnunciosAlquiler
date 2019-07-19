@@ -16,7 +16,7 @@ namespace Everest.Services.Implementations
             _usuarioRepository = usuarioRepository;
             _mapper = mapper;
         }
-        public async Task<BaseServiceResponse<UsuarioResponse>> ConsultarUsuarioAsync(int idUsuario)
+        public async Task<BaseServiceResponse<UsuarioResponse>> ConsultarUsuarioAsync(string idUsuario)
         {
             BaseServiceResponse<UsuarioResponse> response = new BaseServiceResponse<UsuarioResponse>();
             var usuario = await _usuarioRepository.ConsultarUsuarioAsync(idUsuario);

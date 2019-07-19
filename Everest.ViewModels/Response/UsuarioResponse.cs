@@ -2,7 +2,7 @@
 {
     public class UsuarioResponse
     {
-        public int IdUsuario { get; set; }
+        public string Identifier { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Correo { get; set; }

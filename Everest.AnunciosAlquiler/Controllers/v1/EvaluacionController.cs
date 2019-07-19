@@ -23,12 +23,12 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
         }
 
         #region Privates Methods
-        private async Task<BaseServiceResponse<int>> ValidarPropietario(int idUsuario, int idAnuncio)
+        private async Task<BaseServiceResponse<string>> ValidarPropietario(string idUsuario, int idAnuncio)
         {
-            BaseServiceResponse<int> response = new BaseServiceResponse<int>();
+            BaseServiceResponse<string> response = new BaseServiceResponse<string>();
             var usuario = await _usuarioService.ConsultarUsuarioPorAnuncioAsync(idAnuncio);
             
-            if (usuario.Data?.IdUsuario == idUsuario)
+            if (usuario.Data?.Identifier == idUsuario)
             {
                 response.Message = "El usuario no puede registrar una evaluación.";
                 return response;
@@ -40,7 +40,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
         #endregion
 
         [HttpPost]
-        public async Task<IActionResult> Crear(int idUsuario, int idAnuncio, CreacionEvaluacionRequest request)
+        public async Task<IActionResult> Crear(string idUsuario, int idAnuncio, CreacionEvaluacionRequest request)
         {
             try
             {

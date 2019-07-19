@@ -22,7 +22,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
         }
 
         [HttpGet]
-        public async Task<IActionResult> ConsultarPromocionAsync(int idUsuario)
+        public async Task<IActionResult> ConsultarPromocionAsync(string idUsuario)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
 
         [HttpPost]
         [Route("generar")]
-        public async Task<IActionResult> GenerarPromocionAnuncioAsync(int idUsuario)
+        public async Task<IActionResult> GenerarPromocionAnuncioAsync(string idUsuario)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
 
         [HttpPut()]
         [Route("agendar")]
-        public async Task<IActionResult> AgendarPromocionAnuncioAsync(int idUsuario, [FromBody]AgendarPromocionAnuncioRequest request)
+        public async Task<IActionResult> AgendarPromocionAnuncioAsync(string idUsuario, [FromBody]AgendarPromocionAnuncioRequest request)
         {
             try
             {
@@ -90,9 +90,9 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
         }
 
         #region Privates Methods
-        private async Task<BaseServiceResponse<int>> ValidarAdministrador(int idUsuario)
+        private async Task<BaseServiceResponse<string>> ValidarAdministrador(string idUsuario)
         {
-            BaseServiceResponse<int> response = new BaseServiceResponse<int>();
+            BaseServiceResponse<string> response = new BaseServiceResponse<string>();
             var usuario = await _usuarioService.ConsultarUsuarioAsync(idUsuario);
             response.Data = idUsuario;
             if (usuario.Data?.IdRol != (int)RolEnums.Administrador)
@@ -105,9 +105,9 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
             return response;
         }
 
-        private async Task<BaseServiceResponse<int>> ValidarInquilino(int idUsuario)
+        private async Task<BaseServiceResponse<string>> ValidarInquilino(string idUsuario)
         {
-            BaseServiceResponse<int> response = new BaseServiceResponse<int>();
+            BaseServiceResponse<string> response = new BaseServiceResponse<string>();
             var usuario = await _usuarioService.ConsultarUsuarioAsync(idUsuario);
             response.Data = idUsuario;
             if (usuario.Data?.IdRol != (int)RolEnums.Inquilino)

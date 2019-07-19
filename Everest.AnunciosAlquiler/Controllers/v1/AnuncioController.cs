@@ -23,9 +23,9 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
         }
 
         #region Privates Methods
-        private async Task<BaseServiceResponse<int>> ValidarPropietario(int idUsuario)
+        private async Task<BaseServiceResponse<string>> ValidarPropietario(string idUsuario)
         {
-            BaseServiceResponse<int> response = new BaseServiceResponse<int>();
+            BaseServiceResponse<string> response = new BaseServiceResponse<string>();
             var usuario = await _usuarioService.ConsultarUsuarioAsync(idUsuario);
             response.Data = idUsuario;
             if (usuario.Data?.IdRol != (int)RolEnums.Propietario)
@@ -40,7 +40,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
         #endregion
 
         [HttpGet]
-        public async Task<IActionResult> ConsultarAnunciosPorIdUsuario(int idUsuario)
+        public async Task<IActionResult> ConsultarAnunciosPorIdUsuario(string idUsuario)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
 
 
         [HttpPost]
-        public async Task<IActionResult> Crear(int idUsuario, CreacionAnuncioRequest request)
+        public async Task<IActionResult> Crear(string idUsuario, CreacionAnuncioRequest request)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
         }
 
         [HttpPut]
-        public async Task<IActionResult> Editar(int idUsuario, EdicionAnuncioRequest request)
+        public async Task<IActionResult> Editar(string idUsuario, EdicionAnuncioRequest request)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
 
         [HttpPatch]
         [Route("activacion")]
-        public async Task<IActionResult> Activar(int idUsuario, ActivarAnuncioRequest request)
+        public async Task<IActionResult> Activar(string idUsuario, ActivarAnuncioRequest request)
         {
             try
             {
@@ -127,7 +127,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
 
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Eliminar(int idUsuario, int id)
+        public async Task<IActionResult> Eliminar(string idUsuario, int id)
         {
             try
             {

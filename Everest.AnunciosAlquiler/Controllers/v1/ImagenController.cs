@@ -22,9 +22,9 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
         }
 
         #region Privates Methods
-        private async Task<BaseServiceResponse<int>> ValidarPropietario(int idUsuario)
+        private async Task<BaseServiceResponse<string>> ValidarPropietario(string idUsuario)
         {
-            BaseServiceResponse<int> response = new BaseServiceResponse<int>();
+            BaseServiceResponse<string> response = new BaseServiceResponse<string>();
             var usuario = await _usuarioService.ConsultarUsuarioAsync(idUsuario);
             response.Data = idUsuario;
             if (usuario.Data?.IdRol != (int)RolEnums.Propietario)
@@ -40,7 +40,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
 
 
         [HttpPost]
-        public async Task<IActionResult> Crear(int idUsuario, int idAnuncio, [FromForm]CreacionImagenRequest request)
+        public async Task<IActionResult> Crear(string idUsuario, int idAnuncio, [FromForm]CreacionImagenRequest request)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Eliminar(int idUsuario, int idAnuncio, int id)
+        public async Task<IActionResult> Eliminar(string idUsuario, int idAnuncio, int id)
         {
             try
             {

@@ -5,7 +5,7 @@ namespace Everest.Repository.Interfaces
 {
     public interface IUsuarioRepository
     {
-        Task<UsuarioEntity> ConsultarUsuarioAsync(int id);
+        Task<UsuarioEntity> ConsultarUsuarioAsync(string id);
         Task<UsuarioEntity> ConsultarUsuarioPorAnuncioAsync(int id);
     }
 }

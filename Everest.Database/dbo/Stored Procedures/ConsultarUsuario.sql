@@ -1,12 +1,13 @@
 ﻿CREATE PROCEDURE [dbo].[ConsultarUsuario]
-	@Id int
+	@Identifier VARCHAR
 AS
 BEGIN
 	SELECT [IdUsuario]
+		, [Identifier]
       ,[Nombre]
       ,[Apellido]
       ,[IdRol]
     FROM [dbo].[Usuario]
-	WHERE [IdUsuario] = @Id;
+	WHERE [Identifier] = @Identifier;
 END
 
