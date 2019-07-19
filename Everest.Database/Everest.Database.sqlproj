@@ -95,6 +95,8 @@
     <Build Include="dbo\Stored Procedures\CrearPromocionAnuncio.sql" />
     <Build Include="dbo\Stored Procedures\ConsultarAnuncioMasAntiguo.sql" />
     <Build Include="dbo\Stored Procedures\ConsultarPromocion.sql" />
+    <Build Include="dbo\Stored Procedures\ConsultarUsuarioPorAnuncio.sql" />
+    <Build Include="dbo\Stored Procedures\ActivarAnuncio.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Everest.Database.publish.xml" />

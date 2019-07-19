@@ -34,6 +34,22 @@ namespace Everest.Services.Implementations
             _mapper = mapper;
         }
 
+        public async Task<BaseServiceResponse<bool>> ActivarAnuncioAsync(int id, bool esActivo)
+        {
+            BaseServiceResponse<bool> response = new BaseServiceResponse<bool>();
+            var anuncioResult = await _anuncioRepository.ConsultarAsync(id);
+            if (anuncioResult == null)
+            {
+                response.Message = "No existe el anuncio.";
+                return response;
+            }
+            var success = await _anuncioRepository.ActivarAnuncioAsync(id, esActivo);
+            response.Success = success;
+            response.Message = "Se pudo actualizar exitosamente.";
+            response.Data = esActivo;
+            return response;
+        }
+
         public async Task<BaseServiceResponse<IEnumerable<AnuncioResponse>>> ConsultarPorUsuarioAsync(int idUsuario)
         {
             BaseServiceResponse<IEnumerable<AnuncioResponse>> response = new BaseServiceResponse<IEnumerable<AnuncioResponse>>();
@@ -124,7 +140,19 @@ namespace Everest.Services.Implementations
         public async Task<BaseServiceResponse<bool>> EditarAsync(int idUsuario, EdicionAnuncioRequest request)
         {
             BaseServiceResponse<bool> response = new BaseServiceResponse<bool>();
-           
+
+            var anuncioResult = await _anuncioRepository.ConsultarAsync(request.IdAnuncio);
+            if (anuncioResult == null)
+            {
+                response.Message = "No existe el anuncio.";
+                return response;
+            }
+            if (anuncioResult.Activo)
+            {
+                response.Message = "No se puedo editar el anuncio porque se encuentra activo.";
+                return response;
+            }
+
             var anuncio = _mapper.Map<AnuncioEntity>(request);
             anuncio.IdUsuario = idUsuario;
             var anuncioUpdated = await _anuncioRepository.EditarAnuncioAsync(anuncio);
@@ -164,6 +192,18 @@ namespace Everest.Services.Implementations
         public async Task<BaseServiceResponse<bool>> EliminarAsync(int idUsuario, int id)
         {
             BaseServiceResponse<bool> response = new BaseServiceResponse<bool>();
+
+            var anuncioResult = await _anuncioRepository.ConsultarAsync(id);
+            if (anuncioResult == null)
+            {
+                response.Message = "No existe el anuncio.";
+                return response;
+            }
+            if (anuncioResult.Activo)
+            {
+                response.Message = "No se puedo eliminar el anuncio porque se encuentra activo.";
+                return response;
+            }
 
             var deleted = await _anuncioRepository.EliminarAnuncioAsync(id);
             if (!deleted)

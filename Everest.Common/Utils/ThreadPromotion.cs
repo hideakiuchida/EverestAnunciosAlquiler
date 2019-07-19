@@ -9,11 +9,16 @@ namespace Everest.Common.Utils
         private static bool IsAlreadyAsigned;
         private static Thread thread;
 
+        public static void GenerarPromocion(int idPromotion)
+        {
+            IdUsuario = default;
+            IdPromotion = idPromotion;
+            IsAlreadyAsigned = false;
+        }
+
         public static void ActivarPromocionParaUsuario(int idUsuario, int idPromotion)
         {
-            if (idUsuario == default)
-                IsAlreadyAsigned = false;
-            if (!IsAlreadyAsigned)
+            if (!IsAlreadyAsigned && IdUsuario == default)
             {
                 IdUsuario = idUsuario;
                 IdPromotion = idPromotion;

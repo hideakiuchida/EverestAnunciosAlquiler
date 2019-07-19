@@ -31,5 +31,21 @@ namespace Everest.Services.Implementations
             response.Message = "Se obtuvo la información del usuario exitosamente";
             return response;
         }
+
+        public async Task<BaseServiceResponse<UsuarioResponse>> ConsultarUsuarioPorAnuncioAsync(int idAnuncio)
+        {
+            BaseServiceResponse<UsuarioResponse> response = new BaseServiceResponse<UsuarioResponse>();
+            var usuario = await _usuarioRepository.ConsultarUsuarioPorAnuncioAsync(idAnuncio);
+            if (usuario is null)
+            {
+                response.Message = $"No se puedo obtener el usuario para el anuncio: {idAnuncio}.";
+                return response;
+            }
+            var usuarioResponse = _mapper.Map<UsuarioResponse>(usuario);
+            response.Data = usuarioResponse;
+            response.Success = true;
+            response.Message = "Se obtuvo la información del usuario exitosamente";
+            return response;
+        }
     }
 }

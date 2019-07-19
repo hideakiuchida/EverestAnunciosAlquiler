@@ -5,6 +5,7 @@ using Everest.ViewModels.Request;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Everest.AnunciosAlquiler.Controllers.v1
@@ -49,8 +50,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
 
                 var response = await _anuncioService.ConsultarPorUsuarioAsync(idUsuario);
                 if (!response.Success)
-                    return StatusCode(StatusCodes.Status404NotFound, responseUser.Message);
-
+                    return StatusCode(StatusCodes.Status404NotFound, response.Message);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -72,7 +72,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
 
                 var response = await _anuncioService.CrearAsync(idUsuario, request);
                 if (!response.Success)
-                    return StatusCode(StatusCodes.Status400BadRequest, responseUser.Message);
+                    return StatusCode(StatusCodes.Status400BadRequest, response.Message);
 
                 return Created("", response);
             }
@@ -93,7 +93,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
 
                 var response = await _anuncioService.EditarAsync(idUsuario, request);
                 if (!response.Success)
-                    return StatusCode(StatusCodes.Status400BadRequest, responseUser.Message);
+                    return StatusCode(StatusCodes.Status400BadRequest, response.Message);
 
                 return Ok(response);
             }
@@ -102,6 +102,29 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpPatch]
+        [Route("activacion")]
+        public async Task<IActionResult> Activar(int idUsuario, ActivarAnuncioRequest request)
+        {
+            try
+            {
+                var responseUser = await ValidarPropietario(idUsuario);
+                if (!responseUser.Success)
+                    return StatusCode(StatusCodes.Status403Forbidden, responseUser.Message);
+
+                var response = await _anuncioService.ActivarAnuncioAsync(request.IdAnuncio, request.EsActivo);
+                if (!response.Success)
+                    return StatusCode(StatusCodes.Status400BadRequest, response.Message);
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Eliminar(int idUsuario, int id)
@@ -114,7 +137,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
 
                 var response = await _anuncioService.EliminarAsync(idUsuario, id);
                 if (!response.Success)
-                    return StatusCode(StatusCodes.Status400BadRequest, responseUser.Message);
+                    return StatusCode(StatusCodes.Status400BadRequest, response.Message);
 
                 return Ok(response);
             }

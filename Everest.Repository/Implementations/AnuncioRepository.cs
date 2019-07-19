@@ -91,8 +91,7 @@ namespace Everest.Repository.Implementations
                     entity.IdTipoPropiedad,
                     entity.MaximaCantidadPersonas,
                     entity.Precio,
-                    entity.TieneSeguridadPrivada,
-                    entity.Activo
+                    entity.TieneSeguridadPrivada
                 };
                 var result = await _dbConnection.QueryAsync<bool>("EditarAnuncio", spEntity, commandType: CommandType.StoredProcedure);
                 _dbConnection.Close();
@@ -129,6 +128,22 @@ namespace Everest.Repository.Implementations
                 if (_dbConnection.State == ConnectionState.Closed)
                     _dbConnection.Open();
                 var result = await _dbConnection.QueryAsync<AnuncioEntity>("ConsultarAnuncioMasAntiguo", commandType: CommandType.StoredProcedure);
+                _dbConnection.Close();
+                return result.FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                return default;
+            }
+        }
+
+        public async Task<bool> ActivarAnuncioAsync(int id, bool esActivo)
+        {
+            try
+            {
+                if (_dbConnection.State == ConnectionState.Closed)
+                    _dbConnection.Open();
+                var result = await _dbConnection.QueryAsync<bool>("ActivarAnuncio", new { IdAnuncio = id, Activo = esActivo }, commandType: CommandType.StoredProcedure);
                 _dbConnection.Close();
                 return result.FirstOrDefault();
             }

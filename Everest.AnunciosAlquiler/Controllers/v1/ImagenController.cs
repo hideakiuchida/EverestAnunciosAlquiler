@@ -50,7 +50,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
 
                 var response = await _imagenService.CrearImagenAsync(idAnuncio, request);
                 if (!response.Success)
-                    return StatusCode(StatusCodes.Status400BadRequest, responseUser.Message);
+                    return StatusCode(StatusCodes.Status400BadRequest, response.Message);
 
                 return Created("", response);
             }
@@ -72,7 +72,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
 
                 var response = await _imagenService.EliminarAsync(idAnuncio, id);
                 if (!response.Success)
-                    return StatusCode(StatusCodes.Status400BadRequest, responseUser.Message);
+                    return StatusCode(StatusCodes.Status400BadRequest, response.Message);
 
                 return Ok(response);
             }

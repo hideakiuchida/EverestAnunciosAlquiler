@@ -12,5 +12,6 @@ namespace Everest.Repository.Interfaces
         Task<int> CrearAnuncioAsync(AnuncioEntity entity);
         Task<bool> EditarAnuncioAsync(AnuncioEntity entity);
         Task<bool> EliminarAnuncioAsync(int id);
+        Task<bool> ActivarAnuncioAsync(int id, bool esActivo);
     }
 }

@@ -23,17 +23,17 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
         }
 
         #region Privates Methods
-        private async Task<BaseServiceResponse<int>> ValidarPropietario(int idUsuario)
+        private async Task<BaseServiceResponse<int>> ValidarPropietario(int idUsuario, int idAnuncio)
         {
             BaseServiceResponse<int> response = new BaseServiceResponse<int>();
-            var usuario = await _usuarioService.ConsultarUsuarioAsync(idUsuario);
-            response.Data = idUsuario;
-            if (usuario.Data?.IdRol == (int)RolEnums.Propietario)
+            var usuario = await _usuarioService.ConsultarUsuarioPorAnuncioAsync(idAnuncio);
+            
+            if (usuario.Data?.IdUsuario == idUsuario)
             {
-                response.Message = "El usuario no puede registrar una evaluación porque tiene rol Propietario.";
+                response.Message = "El usuario no puede registrar una evaluación.";
                 return response;
             }
-
+            response.Data = idUsuario;
             response.Success = true;
             return response;
         }
@@ -44,13 +44,13 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
         {
             try
             {
-                var responseUser = await ValidarPropietario(idUsuario);
+                var responseUser = await ValidarPropietario(idUsuario, idAnuncio);
                 if (!responseUser.Success)
                     return StatusCode(StatusCodes.Status403Forbidden, responseUser.Message);
 
                 var response = await _evaluacionService.CrearEvaluacionAsync(idAnuncio, request);
                 if (!response.Success)
-                    return StatusCode(StatusCodes.Status400BadRequest, responseUser.Message);
+                    return StatusCode(StatusCodes.Status400BadRequest, response.Message);
 
                 return Created("", response);
             }

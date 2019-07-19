@@ -32,7 +32,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
 
                 var response = await _promocionService.ConsultarPromocionAsync(idUsuario);
                 if (!response.Success)
-                    return StatusCode(StatusCodes.Status404NotFound, responseUser.Message);
+                    return StatusCode(StatusCodes.Status404NotFound, response.Message);
 
                 return Ok(response);
             }
@@ -55,7 +55,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
 
                 var response = await _promocionService.GenerarPromocionAnuncioAsync();
                 if (!response.Success)
-                    return StatusCode(StatusCodes.Status400BadRequest, responseUser.Message);
+                    return StatusCode(StatusCodes.Status400BadRequest, response.Message);
 
                 return Created("", response);
             }
@@ -78,7 +78,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
 
                 var response = await _promocionService.AgendarPromocionAnuncioAsync(idUsuario, request);
                 if (!response.Success)
-                    return StatusCode(StatusCodes.Status400BadRequest, responseUser.Message);
+                    return StatusCode(StatusCodes.Status400BadRequest, response.Message);
 
                 return Ok(response);
             }

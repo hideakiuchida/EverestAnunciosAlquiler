@@ -74,7 +74,6 @@ namespace Everest.ViewModels.Fakes
                 .RuleFor(x => x.Precio, f => Math.Round(f.Random.Decimal(100000, 1000000), 2))
                 .RuleFor(x => x.TieneSeguridadPrivada, f => f.PickRandom(new bool[] { true, false }))
                 .RuleFor(x => x.IdTipoPropiedad, f => f.Random.Number(1, 6))
-                .RuleFor(x => x.Activo, f => true)
                 .Generate();
             return fake;
         }

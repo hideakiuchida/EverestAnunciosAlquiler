@@ -7,5 +7,6 @@ namespace Everest.Services.Interfaces
     public interface IUsuarioService
     {
         Task<BaseServiceResponse<UsuarioResponse>> ConsultarUsuarioAsync(int idUsuario);
+        Task<BaseServiceResponse<UsuarioResponse>> ConsultarUsuarioPorAnuncioAsync(int idAnuncio);
     }
 }

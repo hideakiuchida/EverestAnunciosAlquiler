@@ -30,7 +30,7 @@ namespace Everest.IntegrationTests
             //Arrange
             string connectionString = "Server=HIDEAKIUCHIDA;Database=EVERESTDB;Integrated Security=True;";
             string avanticaConnectionString = "Server=LIM-WS00279\\SQLEXPRESS;Database=EVERESTDB;Integrated Security=True;";
-            IDbConnection dbConnection = new SqlConnection(connectionString);
+            IDbConnection dbConnection = new SqlConnection(avanticaConnectionString);
             IAnuncioRepository anuncioRepository = new AnuncioRepository(dbConnection);
             IAnuncioDetalleRepository anuncioDetalleRepository = new AnuncioDetalleRepository(dbConnection);
             IUbicacionRepository ubicacionRepository = new UbicacionRepository(dbConnection);
@@ -80,8 +80,11 @@ namespace Everest.IntegrationTests
             //Arrange 
             var anuncioResponse = (await _anuncioService.ConsultarPorUsuarioAsync(ValidOwnerUserId)).Data.FirstOrDefault();
             ValidEdicionAnuncioRequest.IdAnuncio = anuncioResponse.IdAnuncio;
+            await _anuncioService.ActivarAnuncioAsync(ValidEdicionAnuncioRequest.IdAnuncio, false);
+
             //Act
             var response = await _anuncioService.EditarAsync(ValidOwnerUserId, ValidEdicionAnuncioRequest);
+            await _anuncioService.ActivarAnuncioAsync(ValidEdicionAnuncioRequest.IdAnuncio, true);
 
             //Assert
             Assert.IsTrue(response.Success);
@@ -94,10 +97,11 @@ namespace Everest.IntegrationTests
             //Arrange 
             var anuncioResponse = (await _anuncioService.ConsultarPorUsuarioAsync(ValidOwnerUserId)).Data.LastOrDefault();
             ValidAnuncioId = anuncioResponse.IdAnuncio;
+            await _anuncioService.ActivarAnuncioAsync(ValidAnuncioId, false);
 
             //Act
             var response = await _anuncioService.EliminarAsync(ValidOwnerUserId, ValidAnuncioId);
-
+            await _anuncioService.ActivarAnuncioAsync(ValidAnuncioId, true);
             //Assert
             Assert.IsTrue(response.Success);
             Assert.IsTrue(response.Data);

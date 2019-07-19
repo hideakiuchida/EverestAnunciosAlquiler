@@ -12,5 +12,6 @@ namespace Everest.Services.Interfaces
         Task<BaseServiceResponse<bool>> EditarAsync(int idUsuario, EdicionAnuncioRequest request);
         Task<BaseServiceResponse<bool>> EliminarAsync(int idUsuario, int id);
         Task<BaseServiceResponse<IEnumerable<AnuncioResponse>>> ConsultarPorUsuarioAsync(int idUsuario);
+        Task<BaseServiceResponse<bool>> ActivarAnuncioAsync(int id, bool esActivo);
     }
 }

@@ -51,7 +51,6 @@ namespace Everest.Services.Implementations
 
         public async Task<BaseServiceResponse<PromocionAnuncioResponse>> ConsultarPromocionAsync(int idUsuario)
         {
-            //Thread 3 minutes
             BaseServiceResponse<PromocionAnuncioResponse> response = new BaseServiceResponse<PromocionAnuncioResponse>();
             var result = await _promocionAnuncioRepository.ConsultarPromocionAsync();
             if (result is null)
@@ -86,7 +85,7 @@ namespace Everest.Services.Implementations
                 return response;
             }
 
-            ThreadPromotion.ActivarPromocionParaUsuario(default, anuncioEntity.IdAnuncio);
+            ThreadPromotion.GenerarPromocion(anuncioEntity.IdAnuncio);
 
             response.Message = "Se obtuvo la información exitosamente.";
             response.Success = true;

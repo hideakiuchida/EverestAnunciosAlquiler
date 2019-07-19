@@ -2,15 +2,15 @@
 
 AS
 BEGIN
-	SELECT TOP 1 [IdAnuncio]
-	  ,[IdUsuario]
-      ,[AdmiteMascota]
-      ,[IdTipoPropiedad]
-      ,[Precio]
-      ,[MaximaCantidadPersonas]
-      ,[TieneSeguridadPrivada]
-      ,[Activo]
-      ,[FechaCreacion]
-	FROM [dbo].[Anuncio]
-	ORDER BY [FechaCreacion] DESC;
+	SELECT TOP 1 [A].[IdAnuncio]
+	  ,[A].[IdUsuario]
+      ,[A].[AdmiteMascota]
+      ,[A].[IdTipoPropiedad]
+      ,[A].[Precio]
+      ,[A].[MaximaCantidadPersonas]
+      ,[A].[TieneSeguridadPrivada]
+      ,[A].[Activo]
+      ,[A].[FechaCreacion]
+	FROM [dbo].[Anuncio] [A] 
+	ORDER BY [A].[FechaCreacion];
 END
