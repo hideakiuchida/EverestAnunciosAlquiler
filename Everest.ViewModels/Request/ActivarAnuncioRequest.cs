@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Everest.ViewModels.Request
 {
     public class ActivarAnuncioRequest
     {
-        public int IdAnuncio { get; set; }
-        public bool EsActivo { get; set; }
+        [Required]
+        public int? IdAnuncio { get; set; }
+        [Required]
+        public bool? EsActivo { get; set; }
     }
 }

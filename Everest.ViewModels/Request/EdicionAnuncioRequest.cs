@@ -1,7 +1,10 @@
-﻿namespace Everest.ViewModels.Request
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Everest.ViewModels.Request
 {
     public class EdicionAnuncioRequest : CreacionAnuncioRequest
     {
-        public int IdAnuncio { get; set; }
+        [Required]
+        public int? IdAnuncio { get; set; }
     }
 }

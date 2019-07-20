@@ -6,7 +6,7 @@ namespace Everest.Repository.Interfaces
 {
     public interface IAnuncioRepository
     {
-        Task<List<AnuncioEntity>> ConsultarAnunciosAsync(int? idUsuario);
+        Task<List<AnuncioEntity>> ConsultarAnunciosAsync(string idUsuario);
         Task<AnuncioEntity> ConsultarAsync(int id);
         Task<AnuncioEntity> ConsultarAnuncioMasAntiguoAsync();
         Task<int> CrearAnuncioAsync(AnuncioEntity entity);

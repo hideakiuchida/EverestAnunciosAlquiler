@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,11 +25,11 @@ namespace Everest.UnitTests
 
 
         #region Private Methods and Parameters for Mock
-        private int ValidOwnerUserId = 1;
+        private string ValidOwnerUserId = "2C5A6FD9-A004-4DEA-B7A0-0A1E4986F2FD";
         private int ValidAnuncioId = 1;
         private CreacionAnuncioRequest ValidCreacionAnuncioRequest;
         private EdicionAnuncioRequest ValidEdicionAnuncioRequest;
-        private int InvalidOwnerUserId = 3;
+        private string InvalidOwnerUserId = String.Empty;
         private int InvalidAnuncioId = default;
        
         private async Task<BaseServiceResponse<UsuarioResponse>> GetUsuarioResponseAsync(bool isPropietario)
@@ -173,7 +174,7 @@ namespace Everest.UnitTests
         public void Given_ValidUserIdAndValidAnuncioId_When_EliminarAsync_Then_ReturnsBaseServiceResponseWithSuccess()
         {
             //Arrange
-            _anuncioServiceMock.Setup(x => x.EliminarAsync(ValidOwnerUserId, ValidAnuncioId)).Returns(GetEliminarResponseAsync(true));
+            _anuncioServiceMock.Setup(x => x.EliminarAsync(ValidAnuncioId)).Returns(GetEliminarResponseAsync(true));
             _usuarioServiceMock.Setup(x => x.ConsultarUsuarioAsync(ValidOwnerUserId)).Returns(GetUsuarioResponseAsync(true));
 
             //Act
@@ -276,7 +277,7 @@ namespace Everest.UnitTests
         public void Given_InvalidUserIdAndValidAnuncioId_When_EliminarAsync_Then_ReturnsForbidResult()
         {
             //Arrange
-            _anuncioServiceMock.Setup(x => x.EliminarAsync(InvalidOwnerUserId, ValidAnuncioId)).Returns(GetEliminarResponseAsync(false));
+            _anuncioServiceMock.Setup(x => x.EliminarAsync(ValidAnuncioId)).Returns(GetEliminarResponseAsync(false));
             _usuarioServiceMock.Setup(x => x.ConsultarUsuarioAsync(InvalidOwnerUserId)).Returns(GetUsuarioResponseAsync(false));
 
             //Act
@@ -293,7 +294,7 @@ namespace Everest.UnitTests
         public void Given_ValidUserIdAndInvalidAnuncioId_When_EliminarAsync_Then_ReturnsBadRequestResult()
         {
             //Arrange
-            _anuncioServiceMock.Setup(x => x.EliminarAsync(ValidOwnerUserId, InvalidAnuncioId)).Returns(GetEliminarResponseAsync(false));
+            _anuncioServiceMock.Setup(x => x.EliminarAsync(InvalidAnuncioId)).Returns(GetEliminarResponseAsync(false));
             _usuarioServiceMock.Setup(x => x.ConsultarUsuarioAsync(ValidOwnerUserId)).Returns(GetUsuarioResponseAsync(true));
 
             //Act

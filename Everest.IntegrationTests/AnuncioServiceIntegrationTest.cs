@@ -19,7 +19,7 @@ namespace Everest.IntegrationTests
         private IAnuncioService _anuncioService;
 
         #region Private Methods and Parameters for Mock
-        private int ValidOwnerUserId = 1;
+        private string ValidOwnerUserId = "2C5A6FD9-A004-4DEA-B7A0-0A1E4986F2FD";
         private int ValidAnuncioId = 1;
         private CreacionAnuncioRequest ValidCreacionAnuncioRequest;
         private EdicionAnuncioRequest ValidEdicionAnuncioRequest;
@@ -30,7 +30,7 @@ namespace Everest.IntegrationTests
             //Arrange
             string connectionString = "Server=HIDEAKIUCHIDA;Database=EVERESTDB;Integrated Security=True;";
             string avanticaConnectionString = "Server=LIM-WS00279\\SQLEXPRESS;Database=EVERESTDB;Integrated Security=True;";
-            IDbConnection dbConnection = new SqlConnection(avanticaConnectionString);
+            IDbConnection dbConnection = new SqlConnection(connectionString);
             IAnuncioRepository anuncioRepository = new AnuncioRepository(dbConnection);
             IAnuncioDetalleRepository anuncioDetalleRepository = new AnuncioDetalleRepository(dbConnection);
             IUbicacionRepository ubicacionRepository = new UbicacionRepository(dbConnection);
@@ -100,7 +100,7 @@ namespace Everest.IntegrationTests
             await _anuncioService.ActivarAnuncioAsync(ValidAnuncioId, false);
 
             //Act
-            var response = await _anuncioService.EliminarAsync(ValidOwnerUserId, ValidAnuncioId);
+            var response = await _anuncioService.EliminarAsync(ValidAnuncioId);
             await _anuncioService.ActivarAnuncioAsync(ValidAnuncioId, true);
             //Assert
             Assert.IsTrue(response.Success);
@@ -136,7 +136,7 @@ namespace Everest.IntegrationTests
         public async Task Given_ValidUserIdAndInvalidAnuncioId_When_EliminarAsync_Then_ReturnsBaseServiceResponseWitUnsuccess()
         {
             //Act
-            var response = await _anuncioService.EliminarAsync(ValidOwnerUserId, InvalidAnuncioId);
+            var response = await _anuncioService.EliminarAsync(InvalidAnuncioId);
 
             //Assert
             Assert.IsNotNull(response.Data);

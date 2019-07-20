@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[ConsultarUsuario]
-	@Identifier VARCHAR
+	@Identifier VARCHAR(100)
 AS
 BEGIN
 	SELECT [IdUsuario]

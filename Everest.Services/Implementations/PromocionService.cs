@@ -13,16 +13,18 @@ namespace Everest.Services.Implementations
     public class PromocionService : IPromocionService
     {
         private readonly IAnuncioRepository _anuncioRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
         private readonly IPromocionAnuncioRepository _promocionAnuncioRepository;
         private readonly IMapper _mapper;
 
-        public PromocionService(IAnuncioRepository anuncioRepository, IPromocionAnuncioRepository promocionAnuncioRepository, IMapper mapper)
+        public PromocionService(IAnuncioRepository anuncioRepository, IPromocionAnuncioRepository promocionAnuncioRepository, IUsuarioRepository usuarioRepository, IMapper mapper)
         {
             _anuncioRepository = anuncioRepository;
+            _usuarioRepository = usuarioRepository;
             _promocionAnuncioRepository = promocionAnuncioRepository;
             _mapper = mapper;
         }
-        public async Task<BaseServiceResponse<bool>> AgendarPromocionAnuncioAsync(int idUsuario, AgendarPromocionAnuncioRequest request)
+        public async Task<BaseServiceResponse<bool>> AgendarPromocionAnuncioAsync(string idUsuario, AgendarPromocionAnuncioRequest request)
         {
             BaseServiceResponse<bool> response = new BaseServiceResponse<bool>();
 
@@ -32,9 +34,9 @@ namespace Everest.Services.Implementations
                 response.Message = $"No se pudo agendar la promoción para el usuario {idUsuario} con el anuncio {request.IdAnuncio}.";
                 return response;
             }
-
+            var usuario = await _usuarioRepository.ConsultarUsuarioAsync(idUsuario);
             var promocionEntity = _mapper.Map<PromocionAnuncioEntity>(request);
-            promocionEntity.IdUsuario = idUsuario;
+            promocionEntity.IdUsuario = usuario.IdUsuario;
             var result = await _promocionAnuncioRepository.AgendarPromocionAnuncioAsync(promocionEntity);
             if (result == default)
             {
@@ -49,7 +51,7 @@ namespace Everest.Services.Implementations
 
         }
 
-        public async Task<BaseServiceResponse<PromocionAnuncioResponse>> ConsultarPromocionAsync(int idUsuario)
+        public async Task<BaseServiceResponse<PromocionAnuncioResponse>> ConsultarPromocionAsync(string idUsuario)
         {
             BaseServiceResponse<PromocionAnuncioResponse> response = new BaseServiceResponse<PromocionAnuncioResponse>();
             var result = await _promocionAnuncioRepository.ConsultarPromocionAsync();

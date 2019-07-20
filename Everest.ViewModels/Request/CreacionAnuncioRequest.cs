@@ -1,19 +1,34 @@
-﻿namespace Everest.ViewModels.Request
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Everest.ViewModels.Request
 {
     public class CreacionAnuncioRequest
     {
-        public int Metros2 { get; set; }
-        public int CantidadHabitaciones { get; set; }
-        public int CantidadBaños { get; set; }
-        public int CantidadParqueos { get; set; }
-        public int Plantas { get; set; }
+        [Required]
+        public int? Metros2 { get; set; }
+        [Required]
+        public int? CantidadHabitaciones { get; set; }
+        [Required]
+        public int? CantidadBaños { get; set; }
+        [Required]
+        public int? CantidadParqueos { get; set; }
+        [Required]
+        public int? Plantas { get; set; }
+        [Required]
         public string Direccion { get; set; }
-        public decimal Latitud { get; set; }
-        public decimal Longitud { get; set; }
-        public bool AdmiteMascota { get; set; }
-        public int IdTipoPropiedad { get; set; }
-        public decimal Precio { get; set; }
-        public int MaximaCantidadPersonas { get; set; }
-        public bool TieneSeguridadPrivada { get; set; }
+        [Required]
+        public decimal? Latitud { get; set; }
+        [Required]
+        public decimal? Longitud { get; set; }
+        [Required]
+        public bool? AdmiteMascota { get; set; }
+        [Required]
+        public int? IdTipoPropiedad { get; set; }
+        [Required]
+        public decimal? Precio { get; set; }
+        [Required]
+        public int? MaximaCantidadPersonas { get; set; }
+        [Required]
+        public bool? TieneSeguridadPrivada { get; set; }
     }
 }

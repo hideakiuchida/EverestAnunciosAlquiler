@@ -32,7 +32,7 @@ namespace Everest.Repository.Implementations
             
         }
 
-        public async Task<List<AnuncioEntity>> ConsultarAnunciosAsync(int? idUsuario)
+        public async Task<List<AnuncioEntity>> ConsultarAnunciosAsync(string idUsuario)
         {
             try
             {

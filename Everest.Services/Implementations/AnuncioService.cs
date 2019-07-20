@@ -50,12 +50,12 @@ namespace Everest.Services.Implementations
             return response;
         }
 
-        public async Task<BaseServiceResponse<IEnumerable<AnuncioResponse>>> ConsultarPorUsuarioAsync(int idUsuario)
+        public async Task<BaseServiceResponse<IEnumerable<AnuncioResponse>>> ConsultarPorUsuarioAsync(string idUsuario)
         {
             BaseServiceResponse<IEnumerable<AnuncioResponse>> response = new BaseServiceResponse<IEnumerable<AnuncioResponse>>();
             List<AnuncioResponse> anuncioResponses = new List<AnuncioResponse>();
             var anuncios = await _anuncioRepository.ConsultarAnunciosAsync(idUsuario);
-
+            var usuario = await _usuarioRepository.ConsultarUsuarioAsync(idUsuario);
             if (anuncios is null)
             {
                 response.Message = $"No se pudo obtener información de anuncios del usuario {idUsuario}";
@@ -66,7 +66,6 @@ namespace Everest.Services.Implementations
             {
                 var anuncioDetalle = await _anuncioDetalleRepository.ConsultarAnuncioDetallePorAnuncioAsync(anuncio.IdAnuncio);
                 var tipoPropiedad = await _tipoPropiedadRepository.ConsultarTipoPropiedadAsync(anuncio.IdTipoPropiedad);
-                var usuario = await _usuarioRepository.ConsultarUsuarioAsync(anuncio.IdUsuario);
                 var ubicacion = await _ubicacionRepository.ConsultarPorAnuncioAsync(anuncio.IdAnuncio);
                 var evaluaciones = await _evaluacionRepository.ConsultarPorAnuncioAsync(anuncio.IdAnuncio);
                 var imagenes = await _imagenRepository.ConsultarPorAnuncioAsync(anuncio.IdAnuncio);
@@ -99,12 +98,12 @@ namespace Everest.Services.Implementations
             return response;
         }
 
-        public async Task<BaseServiceResponse<int>> CrearAsync(int idUsuario, CreacionAnuncioRequest request)
+        public async Task<BaseServiceResponse<int>> CrearAsync(string idUsuario, CreacionAnuncioRequest request)
         {
             BaseServiceResponse<int> response = new BaseServiceResponse<int>();
-
+            var usuario = await _usuarioRepository.ConsultarUsuarioAsync(idUsuario);
             var anuncio = _mapper.Map<AnuncioEntity>(request);
-            anuncio.IdUsuario = idUsuario;
+            anuncio.IdUsuario = usuario.IdUsuario;
             var idAnuncio = await _anuncioRepository.CrearAnuncioAsync(anuncio);
             if (idAnuncio == default)
             {
@@ -137,10 +136,10 @@ namespace Everest.Services.Implementations
             return response;
         }
 
-        public async Task<BaseServiceResponse<bool>> EditarAsync(int idUsuario, EdicionAnuncioRequest request)
+        public async Task<BaseServiceResponse<bool>> EditarAsync(string idUsuario, EdicionAnuncioRequest request)
         {
             BaseServiceResponse<bool> response = new BaseServiceResponse<bool>();
-
+            var usuario = await _usuarioRepository.ConsultarUsuarioAsync(idUsuario);
             var anuncioResult = await _anuncioRepository.ConsultarAsync(request.IdAnuncio);
             if (anuncioResult == null)
             {
@@ -154,7 +153,7 @@ namespace Everest.Services.Implementations
             }
 
             var anuncio = _mapper.Map<AnuncioEntity>(request);
-            anuncio.IdUsuario = idUsuario;
+            anuncio.IdUsuario = usuario.IdUsuario;
             var anuncioUpdated = await _anuncioRepository.EditarAnuncioAsync(anuncio);
             if (!anuncioUpdated)
             {
@@ -189,7 +188,7 @@ namespace Everest.Services.Implementations
             return response;
         }
 
-        public async Task<BaseServiceResponse<bool>> EliminarAsync(int idUsuario, int id)
+        public async Task<BaseServiceResponse<bool>> EliminarAsync(int id)
         {
             BaseServiceResponse<bool> response = new BaseServiceResponse<bool>();
 

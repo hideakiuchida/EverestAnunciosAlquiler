@@ -4,7 +4,7 @@ namespace Everest.Common.Utils
 {
     public static class ThreadPromotion
     {
-        private static int IdUsuario;
+        private static string IdUsuario;
         private static int IdPromotion;
         private static bool IsAlreadyAsigned;
         private static Thread thread;
@@ -16,7 +16,7 @@ namespace Everest.Common.Utils
             IsAlreadyAsigned = false;
         }
 
-        public static void ActivarPromocionParaUsuario(int idUsuario, int idPromotion)
+        public static void ActivarPromocionParaUsuario(string idUsuario, int idPromotion)
         {
             if (!IsAlreadyAsigned && IdUsuario == default)
             {
@@ -38,7 +38,7 @@ namespace Everest.Common.Utils
             }   
         }
 
-        public static bool AgendarPromocionParaUsuario(int idUsuario, int idPromotion)
+        public static bool AgendarPromocionParaUsuario(string idUsuario, int idPromotion)
         {
             if (IsAlreadyAsigned)
                 return false;

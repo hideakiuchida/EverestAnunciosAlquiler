@@ -8,7 +8,7 @@ namespace Everest.Services.Interfaces
     public interface IPromocionService
     {
         Task<BaseServiceResponse<int>> GenerarPromocionAnuncioAsync();
-        Task<BaseServiceResponse<PromocionAnuncioResponse>> ConsultarPromocionAsync(int idUsuario);
-        Task<BaseServiceResponse<bool>> AgendarPromocionAnuncioAsync(int idUsuario, AgendarPromocionAnuncioRequest request);
+        Task<BaseServiceResponse<PromocionAnuncioResponse>> ConsultarPromocionAsync(string idUsuario);
+        Task<BaseServiceResponse<bool>> AgendarPromocionAnuncioAsync(string idUsuario, AgendarPromocionAnuncioRequest request);
     }
 }

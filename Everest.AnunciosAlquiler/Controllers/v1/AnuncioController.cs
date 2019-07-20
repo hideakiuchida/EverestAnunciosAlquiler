@@ -135,7 +135,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
                 if (!responseUser.Success)
                     return StatusCode(StatusCodes.Status403Forbidden, responseUser.Message);
 
-                var response = await _anuncioService.EliminarAsync(idUsuario, id);
+                var response = await _anuncioService.EliminarAsync(id);
                 if (!response.Success)
                     return StatusCode(StatusCodes.Status400BadRequest, response.Message);
 
