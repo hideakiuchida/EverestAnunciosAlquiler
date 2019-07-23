@@ -140,7 +140,7 @@ namespace Everest.Services.Implementations
         {
             BaseServiceResponse<bool> response = new BaseServiceResponse<bool>();
             var usuario = await _usuarioRepository.ConsultarUsuarioAsync(idUsuario);
-            var anuncioResult = await _anuncioRepository.ConsultarAsync(request.IdAnuncio);
+            var anuncioResult = await _anuncioRepository.ConsultarAsync(request.IdAnuncio.Value);
             if (anuncioResult == null)
             {
                 response.Message = "No existe el anuncio.";
@@ -162,7 +162,7 @@ namespace Everest.Services.Implementations
             }
 
             var anuncioDetalle = _mapper.Map<AnuncioDetalleEntity>(request);
-            var anuncioDetalleEntity = await _anuncioDetalleRepository.ConsultarAnuncioDetallePorAnuncioAsync(request.IdAnuncio);
+            var anuncioDetalleEntity = await _anuncioDetalleRepository.ConsultarAnuncioDetallePorAnuncioAsync(request.IdAnuncio.Value);
             anuncioDetalle.IdAnuncioDetalle = anuncioDetalleEntity != default ? anuncioDetalleEntity.IdAnuncioDetalle : default;
             var anuncioDetalleUpdated = await _anuncioDetalleRepository.EditarAnuncioDetalleAsync(anuncioDetalle);
             if (!anuncioDetalleUpdated)
@@ -172,7 +172,7 @@ namespace Everest.Services.Implementations
             }
 
             var ubicacion = _mapper.Map<UbicacionEntity>(request);
-            var ubicacionEntity = await _ubicacionRepository.ConsultarPorAnuncioAsync(request.IdAnuncio);
+            var ubicacionEntity = await _ubicacionRepository.ConsultarPorAnuncioAsync(request.IdAnuncio.Value);
             ubicacion.IdUbicacion = ubicacionEntity != default ? ubicacionEntity.IdUbicacion : default;
             var ubicacionUpdated = await _ubicacionRepository.EditarUbicacionAsync(ubicacion);
             if (!ubicacionUpdated)

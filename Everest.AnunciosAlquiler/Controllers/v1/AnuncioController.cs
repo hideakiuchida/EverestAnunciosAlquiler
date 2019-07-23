@@ -113,7 +113,7 @@ namespace Everest.AnunciosAlquiler.Controllers.v1
                 if (!responseUser.Success)
                     return StatusCode(StatusCodes.Status403Forbidden, responseUser.Message);
 
-                var response = await _anuncioService.ActivarAnuncioAsync(request.IdAnuncio, request.EsActivo);
+                var response = await _anuncioService.ActivarAnuncioAsync(request.IdAnuncio.Value, request.EsActivo.Value);
                 if (!response.Success)
                     return StatusCode(StatusCodes.Status400BadRequest, response.Message);
 

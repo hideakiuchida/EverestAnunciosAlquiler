@@ -28,7 +28,7 @@ namespace Everest.Services.Implementations
         {
             BaseServiceResponse<bool> response = new BaseServiceResponse<bool>();
 
-            var agendado = ThreadPromotion.AgendarPromocionParaUsuario(idUsuario, request.IdAnuncio);
+            var agendado = ThreadPromotion.AgendarPromocionParaUsuario(idUsuario, request.IdAnuncio.Value);
             if (!agendado)
             {
                 response.Message = $"No se pudo agendar la promoción para el usuario {idUsuario} con el anuncio {request.IdAnuncio}.";
